@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yo'l Harakati Qoidalari – Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header>
+
+  <!-- Logo + ball -->
+  <div class="header-top">
+    <div class="logo-area">
+      <div class="logo-icon">🚦</div>
+      <div class="logo-text">
+        <h1>Yo'l Harakati Qoidalari</h1>
+        <p>Bilimingizni sinab ko'ring – 50 ta savol, 5 ta bosqich</p>
+      </div>
+    </div>
+    <div class="header-badge">
+      <span id="hdr-score">0 / 50</span>
+      To'g'ri javoblar
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-strip">
+    <span class="progress-label" id="prog-label">Bosqich 1 / 5</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill"></div>
+    </div>
+    <span class="progress-pct" id="prog-pct">0%</span>
+  </div>
+
+  <!-- Bosqich tablari -->
+  <div class="stage-tabs">
+    <button class="stage-tab active" onclick="goStage(1)">🚦 Bosqich 1</button>
+    <button class="stage-tab"       onclick="goStage(2)">🚧 Bosqich 2</button>
+    <button class="stage-tab"       onclick="goStage(3)">🚗 Bosqich 3</button>
+    <button class="stage-tab"       onclick="goStage(4)">⚠️ Bosqich 4</button>
+    <button class="stage-tab"       onclick="goStage(5)">🏁 Bosqich 5</button>
+  </div>
+
+</header>
+
+<!-- ============================================================
+     BODY / MAIN
+============================================================ -->
+<main>
+
+  <!-- Bosqich sarlavhasi -->
+  <div class="stage-header-card">
+    <div>
+      <h2 id="stage-title">Bosqich 1 – Svetofor va Asosiy Qoidalar</h2>
+      <p  id="stage-sub">1–10-savollar · Har bir to'g'ri javob 1 ball</p>
+    </div>
+    <div class="stage-num-badge" id="stage-num-badge">🚦</div>
+  </div>
+
+  <!-- Savollar shu yerga dinamik qo'shiladi -->
+  <div class="questions-list" id="questions-container"></div>
+
+  <!-- Bosqich natija kartasi -->
+  <div class="score-card" id="score-card">
+    <div class="score-circle" id="sc-circle">0 / 10</div>
+    <div class="score-title"  id="sc-title">Natija</div>
+    <div class="score-desc"   id="sc-desc"></div>
+    <div class="score-stats">
+      <div class="stat-box green">
+        <div class="stat-num green" id="sc-correct">0</div>
+        <div class="stat-lbl">✅ To'g'ri</div>
+      </div>
+      <div class="stat-box red">
+        <div class="stat-num red" id="sc-wrong">0</div>
+        <div class="stat-lbl">❌ Noto'g'ri</div>
+      </div>
+      <div class="stat-box blue">
+        <div class="stat-num blue" id="sc-pct">0%</div>
+        <div class="stat-lbl">📊 Foiz</div>
+      </div>
+    </div>
+    <div class="score-btns">
+      <button class="btn btn-warning" onclick="retryStage()">🔄 Qayta urinish</button>
+      <button class="btn btn-success" id="next-stage-btn" onclick="nextStage()">Keyingi bosqich ➜</button>
+    </div>
+  </div>
+
+  <!-- Yakuniy natija (barcha 5 bosqich tugagach) -->
+  <div id="final-result">
+    <h2 id="fr-title">🏆 Yakuniy Natija</h2>
+    <p  id="fr-sub"></p>
+    <div class="final-ring" id="fr-ring">0%</div>
+    <div class="final-stats">
+      <div class="final-stat">
+        <div class="fs-num" id="fr-total-c">0</div>
+        <div class="fs-lbl">✅ To'g'ri</div>
+      </div>
+      <div class="final-stat">
+        <div class="fs-num" id="fr-total-w">0</div>
+        <div class="fs-lbl">❌ Noto'g'ri</div>
+      </div>
+      <div class="final-stat">
+        <div class="fs-num" id="fr-total-pct">0%</div>
+        <div class="fs-lbl">📊 Foiz</div>
+      </div>
+    </div>
+    <button class="btn btn-warning" onclick="restartAll()" style="margin:0 auto;display:inline-flex;">
+      🔄 Boshidan boshlash
+    </button>
+  </div>
+
+  <!-- Tugmalar -->
+  <div class="actions">
+    <button class="btn btn-danger"   onclick="clearStage()">🗑️ Tozalash</button>
+    <button class="btn btn-primary"  onclick="checkStage()">✅ Javoblarni tekshirish</button>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+
+  <div class="footer-main">
+
+    <!-- Brend -->
+    <div class="footer-brand">
+      <div class="fb-logo">
+        <div class="fb-icon">🚦</div>
+        <h3>YHQ Test Platformasi</h3>
+      </div>
+      <p>
+        O'zbekiston Yo'l Harakati Qoidalari bo'yicha bilimingizni oshiring
+        va haydovchilik imtihoniga tayyorlaning. 50 ta savol, 5 ta bosqich.
+      </p>
+    </div>
+
+    <!-- Bosqichlar -->
+    <div class="footer-col">
+      <h4>📋 Bosqichlar</h4>
+      <ul>
+        <li>Bosqich 1 – Svetofor</li>
+        <li>Bosqich 2 – Yo'l belgilari</li>
+        <li>Bosqich 3 – Haydovchi mas'uliyati</li>
+        <li>Bosqich 4 – Yo'l sharoiti</li>
+        <li>Bosqich 5 – Piyoda &amp; Texnik</li>
+      </ul>
+    </div>
+
+    <!-- Muhim raqamlar -->
+    <div class="footer-col">
+      <h4>📞 Muhim raqamlar</h4>
+      <ul>
+        <li>Tez yordam: 103</li>
+        <li>Yo'l politsiyasi: 102</li>
+        <li>Yong'in xizmati: 101</li>
+        <li>Favqulodda: 112</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="max-width:920px;margin:0 auto;width:100%;">
+    <div class="footer-bottom">
+      <div class="footer-signals">
+        <div class="sig r"></div>
+        <div class="sig y"></div>
+        <div class="sig g"></div>
+      </div>
+      <span>© 2024 Yo'l Harakati Qoidalari Test Platformasi · O'zbekiston</span>
+      <span>50 savol · 5 bosqich</span>
+    </div>
+  </div>
+
+</footer>
+
+<!-- JavaScript alohida fayl -->
+<script src="script.js"></script>
+</body>
+</html>
